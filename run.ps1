@@ -1,4 +1,4 @@
-﻿$buildVersion = 'FastZip-7zstd-2409'
+﻿$buildVersion = '7zip-zstd-2501'
 $PLATFORM = "x64"
 $SUBSYS = "5.02"
 
@@ -8,7 +8,7 @@ $buildDir = "$workDir\build"
 $resDir = "$workDir\resources"
 $srcDir = "$buildDir\$buildVersion"
 $tempDir = "$buildDir\Temp"
-$def_version = "7z2409"
+$def_version = "7z2501"
 
 # 检测build是否存在
 if (Test-Path -Path $buildDir -PathType Container) {

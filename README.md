@@ -16,7 +16,7 @@ Preview:
 运行:
 ```shell
 git submodule init
-git submodule update
+git submodule update --recursive --remote
 ./run.ps1
 ```
 即可在等待几分钟后在根目录找到安装文件

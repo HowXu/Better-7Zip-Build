@@ -9,7 +9,7 @@ MoreModern7Zip
 除了7ZipBuilder作者给的一套图标外 我自己额外加了一套简约风格的图标, 来自7zTC  
 
 Preview:
-![alt text](image.png)
+![pre](image.png)
 
 # Usage
 

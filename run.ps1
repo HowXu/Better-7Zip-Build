@@ -1,4 +1,5 @@
-﻿$buildVersion = '7zip-zstd-2501'
+﻿# 构建变量 这里不用调
+$buildVersion = '7zip-zstd-2600'
 $PLATFORM = "x64"
 $SUBSYS = "5.02"
 
@@ -8,7 +9,12 @@ $buildDir = "$workDir\build"
 $resDir = "$workDir\resources"
 $srcDir = "$buildDir\$buildVersion"
 $tempDir = "$buildDir\Temp"
-$def_version = "7z2501"
+
+# 跟进保持
+$def_version = "7z2600"
+
+# 图标变量 设置为resources目录下的文件夹名 可自行使用其他风格的图标
+$style = "bandizip"
 
 # 检测build是否存在
 if (Test-Path -Path $buildDir -PathType Container) {
@@ -34,7 +40,7 @@ Copy-Item -Path "$workDir\src" -Destination $srcDir -Recurse -Force
 # 资源替换
 
 # 拷贝图标
-Copy-Item -Force -Recurse -Path "$resDir\FileIcons\*.ico" -Destination "$srcDir\CPP\7zip\Archive\Icons"
+Copy-Item -Force -Recurse -Path "$resDir\$style\*.ico" -Destination "$srcDir\CPP\7zip\Archive\Icons"
 
 # 拷贝资源文件
 Copy-Item -Force -Path "$resDir\Format7zF.rc" -Destination "$srcDir\CPP\7zip\Bundles\Format7zF\resource.rc"
@@ -42,6 +48,15 @@ Copy-Item -Force -Path "$resDir\Fm.rc" -Destination "$srcDir\CPP\7zip\Bundles\Fm
 
 # 拷贝UI图
 Copy-Item -Force -Path "$resDir\ToolBarIcons\*.bmp" -Destination "$srcDir\CPP\7zip\UI\FileManager"
+
+# 更换应用图标
+if (Test-Path "$resDir\main.ico") {
+    Copy-Item -Force -Path "$resDir\main.ico" -Destination "$srcDir\CPP\7zip\Bundles\SFXCon\7z.ico"
+    Copy-Item -Force -Path "$resDir\main.ico" -Destination "$srcDir\CPP\7zip\Bundles\SFXWin\7z.ico"
+    Copy-Item -Force -Path "$resDir\main.ico" -Destination "$srcDir\C\Util\7zipInstall\7zip.ico"
+    Copy-Item -Force -Path "$resDir\main.ico" -Destination "$srcDir\CPP\7zip\UI\FileManager\FM.ico"
+    Copy-Item -Force -Path "$resDir\main.ico" -Destination "$srcDir\CPP\7zip\UI\GUI\FM.ico"
+}
 
 # 构建部分
 if (-not (Test-Path $tempDir)) {

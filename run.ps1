@@ -11,7 +11,14 @@ $def_version = "7z2600"
 # 图标变量 设置为resources目录下的文件夹名 可自行使用其他风格的图标
 $style = "bandizip"
 
-# 检测build是否存在
+# 环境变量
+$workDir = $PSScriptRoot
+$buildDir = "$workDir\build"
+$resDir = "$workDir\resources"
+$srcDir = "$buildDir\$buildVersion"
+$tempDir = "$buildDir\Temp"
+
+# 检测build目录是否存在
 if (Test-Path -Path $buildDir -PathType Container) {
 }
 else {

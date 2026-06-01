@@ -2,16 +2,18 @@
 
 这是一个为7zip提供编译脚本的项目，灵感来自[
 MoreModern7Zip
-](https://github.com/YukiIsait/MoreModern7Zip)和[7ZipBuilder](https://github.com/YukiIsait/7ZipBuilder) 但是由于这个仓库的作者写的脚本个性化比较重(变量太多了看不过来), 所以我自己写了一个新的  
+](https://github.com/YukiIsait/MoreModern7Zip)和[7ZipBuilder](https://github.com/YukiIsait/7ZipBuilder) 但是由于这个仓库的作者写的脚本个性化比较重(变量太多了看不过来), 所以我自己写了一个新的。
 
-除此之外, 我们可以使用更好的[7zip-zstd](https://github.com/mcmilk/7-Zip-zstd), 它提供更好的算法  
+除此之外, 我使用了更好的[7zip-zstd](https://github.com/mcmilk/7-Zip-zstd), 它提供更好的算法。
 
-除了7ZipBuilder作者给的一套图标外 我自己额外加了一套简约风格的图标, 来自7zTC  
+除了7ZipBuilder作者给的一套图标外，我自己去Bandizip里抽了一套图标出来，还有一些额外图标也加进去了。
 
 Preview:
 ![preview](image.png)
 
-# Usage
+完全使用Github Actions进行构建，无需自己亲自动手。
+
+# Usage(废弃)
 
 运行:
 ```shell

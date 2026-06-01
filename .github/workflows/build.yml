@@ -1,7 +1,6 @@
 name: Build 7zip-zstd
 
 on:
-  push:
   workflow_dispatch:
 
 jobs:

@@ -1,0 +1,49 @@
+name: Build 7zip-zstd
+
+on:
+  push:
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: windows-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Clone 7zip-zstd
+        run: |
+          git clone --depth 1 https://github.com/mcmilk/7-Zip-zstd.git src
+
+      - name: Get commit info
+        id: commit
+        working-directory: src
+        shell: pwsh
+        run: |
+          $hash = git revparse --short HEAD
+          $date = Get-Date -Format "yyyyMMdd"
+          echo "short_hash=$hash" | Out-File -FilePath $env:GITHUB_OUTPUT -Encoding utf8
+          echo "date=$date" | Out-File -FilePath $env:GITHUB_OUTPUT -Encoding utf8 -Append
+
+      - name: Setup VS Environment
+        uses: microsoft/setup-msbuild@v2
+
+      - name: Build
+        shell: pwsh
+        run: ./run.ps1
+        env:
+          PLATFORM: x64
+          SUBSYS: "5.02"
+          BUILD_DATE: ${{ steps.commit.outputs.date }}
+          BUILD_COMMIT: ${{ steps.commit.outputs.short_hash }}
+
+      - name: Create Release
+        uses: softprops/action-gh-release@v2
+        with:
+          files: 7zstd-${{ steps.commit.outputs.date }}-${{ steps.commit.outputs.short_hash }}.exe
+          tag_name: ${{ github.ref_name }}
+          name: ${{ github.ref_name }}
+          generate_release_notes: true
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

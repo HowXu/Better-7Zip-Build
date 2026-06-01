@@ -1,14 +1,9 @@
-﻿# 构建变量 这里不用调
-$buildVersion = '7zip-zstd-2600'
-$PLATFORM = "x64"
-$SUBSYS = "5.02"
-
-# 环境变量
-$workDir = $PSScriptRoot
-$buildDir = "$workDir\build"
-$resDir = "$workDir\resources"
-$srcDir = "$buildDir\$buildVersion"
-$tempDir = "$buildDir\Temp"
+﻿# 构建变量
+$date = if ($env:BUILD_DATE) { $env:BUILD_DATE } else { Get-Date -Format "yyyyMMdd" }
+$commit = if ($env:BUILD_COMMIT) { $env:BUILD_COMMIT } else { "local" }
+$buildVersion = "7zstd-$date-$commit"
+$PLATFORM = if ($env:PLATFORM) { $env:PLATFORM } else { "x64" }
+$SUBSYS = if ($env:SUBSYS) { $env:SUBSYS } else { "5.02" }
 
 # 跟进保持
 $def_version = "7z2600"
@@ -189,7 +184,7 @@ Copy-Item -Destination "$packDir\7z.sfx" -Path "$OUTDIR\Install.exe"
 Copy-Item -Destination "$packDir\7zCon.sfx" -Path "$OUTDIR\Install.exe"
 
 # 打包
-& "$packDir\7z.exe" a -sfx -t7z -mx=9 -m0=LZMA -r "$workDir\$BuildVersion.exe" "$packDir\*"
+& "$packDir\7z.exe" a -sfx -t7z -mx=9 -m0=LZMA -r "$workDir\$buildVersion.exe" "$packDir\*"
 
 # 清理多余文件
 Remove-Item -Path $preDir -Recurse -Force

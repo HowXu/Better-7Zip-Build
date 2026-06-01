@@ -43,7 +43,7 @@ jobs:
         uses: softprops/action-gh-release@v2
         with:
           files: 7zstd-${{ steps.commit.outputs.date }}-${{ steps.commit.outputs.short_hash }}.exe
-          tag_name: ${{ github.ref_name }}
-          name: ${{ github.ref_name }}
+          tag_name: v${{ steps.commit.outputs.date }}-${{ steps.commit.outputs.short_hash }}
+          name: 7zstd-${{ steps.commit.outputs.date }}-${{ steps.commit.outputs.short_hash }}
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
